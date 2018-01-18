@@ -3,7 +3,7 @@
 require('dotenv').config();
 
 const {
-    AMQP_URI,
+    CLOUDAMQP_URL,
     AMQP_HOST = 'localhost',
     AMQP_PORT = '5672',
     AMQP_USER = 'admin',
@@ -45,5 +45,5 @@ AMQP.connect(AMQPUrl)
 
 function createAMQPUrl() {
     const customUrl = `amqp://${AMQP_USER}:${AMQP_PASSWORD}@${AMQP_HOST}:${AMQP_PORT}/`
-    return AMQP_URI || customUrl;
+    return CLOUDAMQP_URL || customUrl;
 }
