@@ -1,0 +1,49 @@
+#!/usr/bin/env node
+
+require('dotenv').config();
+
+const {
+    AMQP_URI,
+    AMQP_HOST = 'localhost',
+    AMQP_PORT = '5672',
+    AMQP_USER = 'admin',
+    AMQP_PASSWORD = 'iosr2017',
+    AMQP_QUEUE_NAME = 'orders-to-process'
+} = process.env;
+
+const AMQP = require('amqplib');
+const AMQPUrl = createAMQPUrl();
+var amqpConn;
+var amqpChannel;
+
+
+console.log(`Connecting to: ${AMQPUrl}`);
+AMQP.connect(AMQPUrl)
+    .then(amqpConnRes => {
+        process.once('SIGINT', function() { conn.close(); });
+        amqpConn = amqpConnRes;
+        console.log(`Connected to amqp. Creating channel...`);
+        return amqpConn.createChannel();
+    })
+    .then(amqpChannelRes => {
+        amqpChannel = amqpChannelRes;
+        console.log(`AMQP channel created, asserting queue...`);
+        return amqpChannel.assertQueue(AMQP_QUEUE_NAME, {durable: true});
+    })
+    .then( reply => {
+        console.log(`AMQP queue valid.`);
+        return amqpChannel.prefetch(1);
+    })
+    .then(reply => {
+        const app = require('../src/app')({channel: amqpChannel, queue: AMQP_QUEUE_NAME});
+    })
+    .catch(error => {
+        console.log('Connecting failed.');
+        console.log(error);
+        process.exit(1);
+    });
+
+function createAMQPUrl() {
+    const customUrl = `amqp://${AMQP_USER}:${AMQP_PASSWORD}@${AMQP_HOST}:${AMQP_PORT}/`
+    return AMQP_URI || customUrl;
+}
