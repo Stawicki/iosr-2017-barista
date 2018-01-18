@@ -21,6 +21,9 @@ module.exports = {
             },
             mongolab: {
                 plan: 'mongolab:sandbox'
+            },
+            cloudamqp: {
+                plan: 'cloudamqp:lemur'
             }
         },
         collaborators: [
@@ -46,6 +49,9 @@ module.exports = {
             },
             mongolab: {
                 plan: 'mongolab:sandbox'
+            },
+            cloudamqp: {
+                plan: 'cloudamqp:lemur'
             }
         },
         collaborators: [
