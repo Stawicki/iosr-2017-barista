@@ -10,7 +10,8 @@ module.exports = {
         maintenance: false,
         stack: 'heroku-16',
         config_vars: {
-            NODE_ENV: 'staging'
+            NODE_ENV: 'staging',
+            CLOUDAMQP_URL: 'amqp://grponzdp:pwcTF2Rql4tGh3SyssbVOxe2Ih6jTFJb@gopher.rmq.cloudamqp.com/grponzdp'
         },
         addons: {
             librato: {
@@ -21,9 +22,6 @@ module.exports = {
             },
             mongolab: {
                 plan: 'mongolab:sandbox'
-            },
-            cloudamqp: {
-                plan: 'cloudamqp:lemur'
             }
         },
         collaborators: [
@@ -38,7 +36,8 @@ module.exports = {
         maintenance: false,
         stack: 'heroku-16',
         config_vars: {
-            NODE_ENV: 'production'
+            NODE_ENV: 'production',
+            CLOUDAMQP_URL: 'amqp://grponzdp:pwcTF2Rql4tGh3SyssbVOxe2Ih6jTFJb@gopher.rmq.cloudamqp.com/grponzdp'
         },
         addons: {
             librato: {
@@ -49,9 +48,6 @@ module.exports = {
             },
             mongolab: {
                 plan: 'mongolab:sandbox'
-            },
-            cloudamqp: {
-                plan: 'cloudamqp:lemur'
             }
         },
         collaborators: [
