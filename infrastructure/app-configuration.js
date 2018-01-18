@@ -38,7 +38,7 @@ module.exports = {
         stack: 'heroku-16',
         config_vars: {
             NODE_ENV: 'production',
-            ORDERS_SERVICE_URL: 'http://iosr2017orders-staging.herokuapp.com',
+            ORDERS_SERVICE_URL: 'http://iosr2017orders-production.herokuapp.com',
             CLOUDAMQP_URL: 'amqp://grponzdp:pwcTF2Rql4tGh3SyssbVOxe2Ih6jTFJb@gopher.rmq.cloudamqp.com/grponzdp'
         },
         addons: {
