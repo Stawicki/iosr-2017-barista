@@ -20,7 +20,7 @@ var amqpChannel;
 console.log(`Connecting to: ${AMQPUrl}`);
 AMQP.connect(AMQPUrl)
     .then(amqpConnRes => {
-        process.once('SIGINT', function() { conn.close(); });
+        process.once('SIGINT', function() { amqpConn.close(); });
         amqpConn = amqpConnRes;
         console.log(`Connected to amqp. Creating channel...`);
         return amqpConn.createChannel();
