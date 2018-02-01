@@ -9,7 +9,8 @@ module.exports = (amqpData) => {
     }
 
     function processMessagePart2(msg){
-        ordersService.updateOne(msg.content, {status: "realized"})
+        console.log("###", JSON.parse(msg.content.toString()))
+        ordersService.updateOne(JSON.parse(msg.content.toString()), {status: "realized"})
             .then( reply => {
              amqpData.channel.ack(msg)
             })

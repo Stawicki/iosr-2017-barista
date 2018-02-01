@@ -14,7 +14,7 @@ module.exports = () => {
                 });
             });
         },
-        updateOne(id, updatedContent) {
+        updateOne({id, token}, updatedContent) {
             return new Promise((resolve, reject) => {
                 const updateOrderRequestUrl = `${ORDERS_SERVICE_URL}/v1/orders/${id}`;
                 return request({
@@ -22,7 +22,8 @@ module.exports = () => {
                         url: updateOrderRequestUrl,
                         json: true,
                         headers: {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            'authorization': token
                         },
                         body: updatedContent
                     }, (err, result) => {
